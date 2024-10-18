@@ -1,4 +1,4 @@
-package com.ecommerce.application.ecommerce_backend.product;
+package com.ecommerce.application.ecommerce_backend.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,20 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "products")
+@Table(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private double price;
-    private int quantity;
-    private String category;
-    private String imageUrl;
-
+    private String username;
+    private String password;
+    private String email;
+    private String role;
 }
