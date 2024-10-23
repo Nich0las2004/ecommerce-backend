@@ -1,5 +1,6 @@
 package com.ecommerce.application.ecommerce_backend.product;
 
+import com.ecommerce.application.ecommerce_backend.category.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,9 @@ public class Product {
     private String description;
     private double price;
     private int quantity;
-    private String category;
     private String imageUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }
