@@ -2,16 +2,14 @@ package com.ecommerce.application.ecommerce_backend.user.controller;
 
 import com.ecommerce.application.ecommerce_backend.user.User;
 import com.ecommerce.application.ecommerce_backend.user.dto.UserLoginDTO;
+import com.ecommerce.application.ecommerce_backend.user.dto.UserProfileDTO;
 import com.ecommerce.application.ecommerce_backend.user.dto.UserRegistrationDTO;
 import com.ecommerce.application.ecommerce_backend.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -34,5 +32,11 @@ public class UserController {
     public ResponseEntity<User> loginUser(@RequestBody @Valid UserLoginDTO userLoginDTO) {
         User loggedInUser = userService.loginUser(userLoginDTO);
         return ResponseEntity.status(HttpStatus.OK).body(loggedInUser);
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<UserProfileDTO> getUserProfile(@PathVariable String username) {
+        UserProfileDTO userProfile = userService.getUserProfile(username);
+        return ResponseEntity.status(HttpStatus.OK).body(userProfile);
     }
 }
