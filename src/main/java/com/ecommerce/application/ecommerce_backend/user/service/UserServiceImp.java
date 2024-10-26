@@ -2,9 +2,11 @@ package com.ecommerce.application.ecommerce_backend.user.service;
 
 import com.ecommerce.application.ecommerce_backend.user.User;
 import com.ecommerce.application.ecommerce_backend.user.dto.UserLoginDTO;
+import com.ecommerce.application.ecommerce_backend.user.dto.UserProfileDTO;
 import com.ecommerce.application.ecommerce_backend.user.dto.UserRegistrationDTO;
 import com.ecommerce.application.ecommerce_backend.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,6 +34,21 @@ public class UserServiceImp implements UserService {
             return user;
         }
         return null;
+    }
+
+    public UserProfileDTO getUserProfile(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        UserProfileDTO userProfile = new UserProfileDTO();
+        userProfile.setId(user.getId());
+        userProfile.setUsername(user.getUsername());
+        userProfile.setEmail(user.getEmail());
+        userProfile.setRole(user.getRole());
+
+        return userProfile;
     }
 
 }
